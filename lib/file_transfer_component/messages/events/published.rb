@@ -1,13 +1,12 @@
 module FileTransferComponent
   module Messages
-    module Commands
-      class Initiate
+    module Events
+      class Published
         include Messaging::Message
 
         attribute :file_id, String
-        attribute :name, String
-        attribute :temp_path, String
-        attribute :time, String
+        attribute :file_cloud_uri, String
+        attribute :processed_time, String
       end
     end
   end
