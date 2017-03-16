@@ -8,5 +8,6 @@ module FileTransferComponent
     attribute :size, String
     attribute :type, String
     attribute :cloud_uri, String
+    attribute :initiated_time, Time
   end
 end

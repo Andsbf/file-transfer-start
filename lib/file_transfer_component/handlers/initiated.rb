@@ -41,19 +41,16 @@ module FileTransferComponent
 
             stream_name = stream_name(file_id)
 
-            published_event = Messages::Events::Published.new()
-
-            published_event.file_id = initiated.file_id
-            published_event.file_cloud_uri =file_cloud_uri[:address]
-
             if ok
-              file_transfer_published = Published.follow(published_event)
+              file_transfer_published = Published.follow(initiated, include: [:file_id])
+
+              file_transfer_published.file_cloud_uri =file_cloud_uri[:address]
 
               file_transfer_published.processed_time = time
 
               write.(file_transfer_published, stream_name, expected_version: stream_version)
             else
-              # need to decide what to do here! good question to monday
+              logger.debug "CloudStore ERROR!"
             end
         end
       # end

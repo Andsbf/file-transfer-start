@@ -6,7 +6,7 @@ module FileTransferComponent
 
       initializer :name, :uri
 
-      def self.build(name, uri, replay_stream_name: nil)
+      def self.build(name, uri, reply_stream_name: nil)
         instance = new(name, uri)
         instance.reply_stream_name = reply_stream_name
         instance.configure

@@ -1,17 +1,17 @@
 module FileTransferComponent
-  module Comannds
+  module Commands
     module Command
       def self.included(cls)
         cls.class_exec do
           include Messaging::Postgres::StreamName
-          include FileTransComponent::Messages::Commands
-          include Log::Depencency
+          include FileTransferComponent::Messages::Commands
+          # include Log::Depencency
 
-          attr_acessor :reply_stream_name
+          attr_accessor :reply_stream_name
 
           dependency :write, Messaging::Postgres::Write
-          depenency :clock, Clock::UTC
-          dependecy :identifier, Identifier::UUID::Random
+          dependency :clock, Clock::UTC
+          dependency :identifier, Identifier::UUID::Random
 
           category :file_transfer
           abstract :command
@@ -30,7 +30,7 @@ module FileTransferComponent
 
       def write_command
         stream_name = command_stream_name(file_id)
-        write.(command, stream_name, reply_stream_name: replay_stream_name)
+        write.(command, stream_name, reply_stream_name: reply_stream_name)
       end
     end
   end
