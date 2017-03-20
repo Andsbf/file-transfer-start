@@ -51,6 +51,28 @@ module FileTransferComponent
         # writing to category file_transfer stream, the iniated event
         write.(file_transfer_initiated, stream_name, expected_version: stream_version)
       end
+
+      handle Rename do |rename|
+
+        file_id = rename.file_id
+
+        file, stream_version =  store.get(file_id, include: :version)
+
+        if file.nil?
+          logger.debug "#{rename} command was ignored. File trasfer #{file_id} not found"
+          return
+        end
+
+        time = clock.iso8601
+
+        file_transfer_renamed = Renamed.follow(rename)
+
+        file_transfer_renamed.processed_time = time
+
+        stream_name = stream_name(file_id)
+
+        write.(file_transfer_renamed, stream_name, expected_version: stream_version)
+      end
     end
   end
 end

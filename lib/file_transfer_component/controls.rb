@@ -6,7 +6,9 @@ require 'file_transfer_component/controls/file'
 require 'file_transfer_component/controls/uri'
 
 require 'file_transfer_component/controls/commands/initiate'
+require 'file_transfer_component/controls/commands/rename'
 
 require 'file_transfer_component/controls/events/initiated'
+require 'file_transfer_component/controls/events/renamed'
 
 require 'file_transfer_component/controls/cloud_store'

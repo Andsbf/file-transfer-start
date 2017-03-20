@@ -13,5 +13,12 @@ module FileTransferComponent
 
       file.initiated_time = Time.parse(initiated.processed_time)
     end
+
+    apply Renamed do |renamed|
+      SetAttributes.(file, renamed, copy: [
+       {file_id: :id},
+        :name,
+       ])
+    end
   end
 end
