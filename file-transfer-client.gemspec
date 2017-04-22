@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'file_transfer-client'
   s.version = '0.0.0'

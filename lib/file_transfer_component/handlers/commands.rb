@@ -12,6 +12,8 @@ module FileTransferComponent
       dependency :store, FileTransferComponent::Store
 
       def configure
+        require 'pry'
+        binding.pry
         Messaging::Postgres::Write.configure self
         Clock::UTC.configure self
         FileTransferComponent::Store.configure self
@@ -60,6 +62,11 @@ module FileTransferComponent
 
         if file.nil?
           logger.debug "#{rename} command was ignored. File trasfer #{file_id} not found"
+          return
+        end
+
+        if file.name == rename.name
+          logger.debug "#{rename} command was ignored. File trasfer #{file_id} has same name"
           return
         end
 

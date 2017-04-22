@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'pry'
+gem 'evt-consumer-postgres'
 gem 'eventide-postgres'
 gem 'test_bench'

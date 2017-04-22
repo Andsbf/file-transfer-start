@@ -14,6 +14,14 @@ module FileTransferComponent
       file.initiated_time = Time.parse(initiated.processed_time)
     end
 
+    apply Published do |published|
+      SetAttributes.(file, published, copy: [
+          {file_id: :id},
+          {file_cloud_uri: :cloud_uri},
+          :name,
+      ])
+    end
+
     apply Renamed do |renamed|
       SetAttributes.(file, renamed, copy: [
        {file_id: :id},
